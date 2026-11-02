@@ -1,0 +1,31 @@
+# Secrets and local configuration
+.env
+*.env
+!.env.example
+application-local.yml
+application-secret*.yml
+*.p12
+*.jks
+*.sso
+cwallet.sso
+ewallet.p12
+wallet/
+
+# Database and Data Pump files
+*.dbf
+*.dmp
+
+# Backend
+backend/target/
+*.class
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
