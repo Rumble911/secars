@@ -8,7 +8,7 @@ SecARS is a university application (students, lecturers, courses, sections, enro
 privileges, row-level security (VPD), SQL-injection defence, auditing, encryption, backup/restore and masking - each
 proved by repeatable tests.
 
-**Group members:** Abdullah Ibrahim Hassan, Abdulrahman Awartani, [Member 3 - name to be added]
+**Group members:** Abdullah Ibrahim Hassan, Abdulrahman Al-Otaibi
 
 > All data in this project is fictional. Attacks and scans are performed only against the isolated LAB schema on localhost.
 
