@@ -5,6 +5,12 @@
 
 server:
   port: 8080
+  servlet:
+    session:
+      timeout: 15m          # idle sessions expire after 15 minutes (SR01 / BR13)
+      cookie:
+        http-only: true     # JavaScript cannot read the session cookie
+        same-site: strict   # browsers do not send it on cross-site requests
 
 spring:
   application:
