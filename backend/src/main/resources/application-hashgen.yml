@@ -1,0 +1,4 @@
+# Used only by the hashgen tool. No web server, no database connection needed.
+spring:
+  main:
+    web-application-type: none
