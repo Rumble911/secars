@@ -1,0 +1,18 @@
+# SecARS backend configuration.
+# Secrets are NEVER written here. Set them as environment variables:
+#   DB_PASSWORD  = password of APP_USER (required)
+# Other values have safe local defaults for the lab setup.
+
+server:
+  port: 8080
+
+spring:
+  application:
+    name: secars-backend
+  datasource:
+    url: ${DB_URL:jdbc:oracle:thin:@//localhost:1521/FREEPDB1}
+    username: ${DB_USER:APP_USER}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 10000
