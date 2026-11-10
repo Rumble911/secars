@@ -24,8 +24,11 @@ public class SecurityConfig {
             // Both are protected by SameSite=Strict cookies. Revisit when the React client exists.
             .csrf(csrf -> csrf.ignoringRequestMatchers("/api/auth/login", "/api/auth/logout"))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/health", "/api/health/db", "/api/auth/login").permitAll()
+                .requestMatchers("/api/health", "/api/health/db", "/api/auth/login", "/api/auth/csrf").permitAll()
                 .requestMatchers("/api/student/**").hasRole("STUDENT")
+                .requestMatchers("/api/lecturer/**").hasRole("LECTURER")
+                .requestMatchers("/api/registrar/**").hasRole("REGISTRAR")
+                .requestMatchers("/api/auditor/**").hasRole("AUDITOR")
                 .anyRequest().authenticated())
             // Unauthenticated calls get 401 with no body or hints (FR09).
             .exceptionHandling(ex -> ex.authenticationEntryPoint(

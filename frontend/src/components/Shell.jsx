@@ -1,9 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../auth.jsx';
 
-// Shell shared by the four role screens. The data panels are filled in as the
-// matching backend endpoints are built (see the list in the panel below).
-export default function RolePage({ title }) {
+// Common frame for every signed-in screen: title, who is signed in, and sign out.
+export default function Shell({ title, children }) {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
 
@@ -16,21 +15,14 @@ export default function RolePage({ title }) {
     <main className="shell">
       <header className="topbar">
         <div>
-          <h1>{title} portal</h1>
+          <h1>{title}</h1>
           <p className="muted">Signed in as {user.username}</p>
         </div>
         <button className="secondary" onClick={onLogout}>
           Sign out
         </button>
       </header>
-
-      <section className="card">
-        <h2>Coming next</h2>
-        <p className="muted">
-          This screen is connected to the sign-in and role check. The data views for {title.toLowerCase()} are
-          added once their backend endpoints exist.
-        </p>
-      </section>
+      {children}
     </main>
   );
 }

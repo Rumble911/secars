@@ -1,8 +1,10 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { useAuth, homeForRole } from './auth.jsx';
 import Login from './pages/Login.jsx';
-import RolePage from './pages/RolePage.jsx';
 import StudentPage from './pages/StudentPage.jsx';
+import LecturerPage from './pages/LecturerPage.jsx';
+import RegistrarPage from './pages/RegistrarPage.jsx';
+import AuditorPage from './pages/AuditorPage.jsx';
 
 // Only signed-in users with the matching role may see a role page.
 // Anything else goes back to the login screen. The server enforces the same rule.
@@ -43,7 +45,7 @@ export default function App() {
         path="/lecturer"
         element={
           <RequireRole role="ROLE_LECTURER">
-            <RolePage title="Lecturer" />
+            <LecturerPage />
           </RequireRole>
         }
       />
@@ -51,7 +53,7 @@ export default function App() {
         path="/registrar"
         element={
           <RequireRole role="ROLE_REGISTRAR">
-            <RolePage title="Registrar" />
+            <RegistrarPage />
           </RequireRole>
         }
       />
@@ -59,7 +61,7 @@ export default function App() {
         path="/auditor"
         element={
           <RequireRole role="ROLE_AUDITOR">
-            <RolePage title="Auditor" />
+            <AuditorPage />
           </RequireRole>
         }
       />
