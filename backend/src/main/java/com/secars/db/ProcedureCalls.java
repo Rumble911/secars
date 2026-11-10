@@ -105,11 +105,30 @@ public class ProcedureCalls {
             Map<String, Object> row = new LinkedHashMap<>();
             for (int i = 1; i <= columns; i++) {
                 String name = meta.getColumnLabel(i).toLowerCase(Locale.ROOT);
-                row.put(name, rs.getObject(i));
+                row.put(name, readValue(rs, meta.getColumnType(i), i));
             }
             rows.add(row);
         }
         return rows;
+    }
+
+    /**
+     * Reads one column as a plain Java value. Oracle's own classes returned by getObject
+     * cannot be turned into JSON, so each column is read as a standard type.
+     */
+    private static Object readValue(ResultSet rs, int sqlType, int index) throws SQLException {
+        switch (sqlType) {
+            case Types.TIMESTAMP:
+            case Types.DATE:
+                return rs.getTimestamp(index);
+            case Types.NUMERIC:
+            case Types.DECIMAL:
+            case Types.INTEGER:
+            case Types.BIGINT:
+                return rs.getBigDecimal(index);
+            default:
+                return rs.getString(index);
+        }
     }
 
     /** Turns an ORA-20xxx message into a client error. Anything else becomes a logged 500. */
