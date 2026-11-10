@@ -1,0 +1,137 @@
+:root {
+  --bg: #f5f6f8;
+  --fg: #1d2330;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #dde1e7;
+  --accent: #1f5fbf;
+  --danger: #b42318;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #14171c;
+    --fg: #e6e9ef;
+    --muted: #9aa3b2;
+    --card: #1d222a;
+    --border: #2f3640;
+    --accent: #6ea8ff;
+    --danger: #ff8a80;
+  }
+}
+
+:root[data-theme='dark'] {
+  --bg: #14171c;
+  --fg: #e6e9ef;
+  --muted: #9aa3b2;
+  --card: #1d222a;
+  --border: #2f3640;
+  --accent: #6ea8ff;
+  --danger: #ff8a80;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+h1,
+h2 {
+  margin: 0 0 0.25rem;
+}
+
+.muted {
+  color: var(--muted);
+  margin: 0 0 1rem;
+}
+
+.center {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.login {
+  max-width: 360px;
+  margin: 10vh auto;
+  padding: 0 16px;
+}
+
+.shell {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.95rem;
+}
+
+input {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+button {
+  font: inherit;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--accent);
+  color: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+
+.error {
+  color: var(--danger);
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
