@@ -20,9 +20,9 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            // CSRF stays on for every state-changing call except login, which cannot have a token yet.
-            // Login is still protected by SameSite=Strict cookies. Revisit when the React client exists.
-            .csrf(csrf -> csrf.ignoringRequestMatchers("/api/auth/login"))
+            // CSRF stays on for every state-changing call except login and logout, which cannot have a token yet.
+            // Both are protected by SameSite=Strict cookies. Revisit when the React client exists.
+            .csrf(csrf -> csrf.ignoringRequestMatchers("/api/auth/login", "/api/auth/logout"))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/health", "/api/health/db", "/api/auth/login").permitAll()
                 .anyRequest().authenticated())
