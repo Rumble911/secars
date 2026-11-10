@@ -25,6 +25,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.ignoringRequestMatchers("/api/auth/login", "/api/auth/logout"))
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/health", "/api/health/db", "/api/auth/login").permitAll()
+                .requestMatchers("/api/student/**").hasRole("STUDENT")
                 .anyRequest().authenticated())
             // Unauthenticated calls get 401 with no body or hints (FR09).
             .exceptionHandling(ex -> ex.authenticationEntryPoint(

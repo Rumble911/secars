@@ -31,5 +31,7 @@ export const api = {
 
   me: () => request('/api/auth/me'),
 
+  myEnrollments: () => request('/api/student/enrollments'),
+
   logout: () => request('/api/auth/logout', { method: 'POST' }),
 };
