@@ -712,6 +712,7 @@ INSERT INTO enrollments (student_id, offering_id, grade) VALUES ((SELECT student
 INSERT INTO app_users (username, password_hash, app_role, student_id) VALUES ('student1', '{PENDING}', 'STUDENT', (SELECT student_id FROM students WHERE national_id='2655846132'));
 INSERT INTO app_users (username, password_hash, app_role, lecturer_id) VALUES ('lecturer1', '{PENDING}', 'LECTURER', (SELECT MIN(lecturer_id) FROM lecturers));
 INSERT INTO app_users (username, password_hash, app_role) VALUES ('registrar1', '{PENDING}', 'REGISTRAR');
+INSERT INTO app_users (username, password_hash, app_role) VALUES ('registrar2', '{PENDING}', 'REGISTRAR');
 INSERT INTO app_users (username, password_hash, app_role) VALUES ('auditor1', '{PENDING}', 'AUDITOR');
 
 COMMIT;

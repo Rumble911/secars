@@ -21,6 +21,7 @@ public class HashGenerator implements ApplicationRunner {
         {"student1", "DEMO_STUDENT_PW"},
         {"lecturer1", "DEMO_LECTURER_PW"},
         {"registrar1", "DEMO_REGISTRAR_PW"},
+        {"registrar2", "DEMO_REGISTRAR2_PW"},
         {"auditor1", "DEMO_AUDITOR_PW"}
     };
 
