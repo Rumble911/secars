@@ -17,7 +17,7 @@ proved by repeatable tests.
 | Milestone | Due | Status | Tag |
 |-----------|-----|--------|-----|
 | M1 - Analysis & Design | 06/11/2026 | Delivered (see `docs/M1/`) | `M1` |
-| M2 - System Development | 20/11/2026 | Planned | `M2` |
+| M2 - System Development | 20/11/2026 | Built, under test (see `docs/M2/`) | `M2` |
 | M3 - Security Implementation | 11/12/2026 | Planned | `M3` |
 | M4 - Final Assessment & Delivery | 25/12/2026 | Planned | `FINAL` |
 
@@ -58,11 +58,59 @@ JDK 21, Maven, Node.js LTS, Git, Oracle AI Database Free 26ai (preferably the of
 `FREEPDB1`, verify the actual name), and SQL Developer or SQLcl. Check with `java -version`, `mvn -version`,
 `node --version`, `git --version`.
 
-## Running the project
+## Running the project (M2)
 
-The step-by-step run instructions are completed with milestone M2 (SQL scripts in order, environment variables,
-`mvn spring-boot:run`, `npm install` then `npm run dev`). Configuration is read from environment variables; copy
-`.env.example` to `.env` (never committed) and fill in your own local values.
+**1. Database** (SQL*Plus, one time, in this order):
+
+| Order | File | Run as | Purpose |
+|-------|------|--------|---------|
+| 1 | `db/01_admin_setup.sql` | SYS (container FREEPDB1) | Creates `ARS_OWNER` and `APP_USER` |
+| 2 | `db/02_schema.sql` | ARS_OWNER | Nine tables |
+| 3 | `db/03_seed.sql` | ARS_OWNER | Sample data (fictional) |
+| 4 | `db/04_auth_package.sql` | ARS_OWNER | Login package `ARS_AUTH` |
+| 5 | `db/05_student_package.sql` | ARS_OWNER | Student package `ARS_STUDENT` |
+| 6 | `db/06_staff_packages.sql` | ARS_OWNER | Lecturer, registrar, auditor packages |
+
+```
+sqlplus ars_owner@localhost:1521/FREEPDB1
+@db\02_schema.sql
+```
+
+**2. Demo passwords** (never stored in Git). Set the variables in the PowerShell window, then run the
+`hashgen` profile. It prints one `UPDATE` per account; paste them into SQL*Plus as `ARS_OWNER` and `COMMIT`.
+
+```powershell
+cd backend
+$env:DEMO_STUDENT_PW = "<min 10 characters>"
+$env:DEMO_LECTURER_PW = "<min 10 characters>"
+$env:DEMO_REGISTRAR_PW = "<min 10 characters>"
+$env:DEMO_AUDITOR_PW = "<min 10 characters>"
+mvn spring-boot:run "-Dspring-boot.run.profiles=hashgen"
+```
+
+**3. Backend** (keep this window open):
+
+```powershell
+cd backend
+$env:DB_PASSWORD = "<APP_USER password>"
+mvn spring-boot:run
+```
+
+Wait for `Started SecarsApplication`. The API runs on `http://localhost:8080`.
+
+**4. Frontend** (second window):
+
+```powershell
+cd frontend
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173/login`.
+
+**5. Tests**: follow `docs/M2/M2_FunctionalTests.md` (demo accounts and expected results are listed there).
+
+Configuration is read from environment variables only. `.env.example` lists the names; never commit real values.
 
 ## Secrets policy
 
